@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.hypixel.hytale:Server:latest.release")
+    compileOnly(files("libs/HytaleServer.jar"))
     implementation(files("libs/HyUI-0.5.11-all.jar"))
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))

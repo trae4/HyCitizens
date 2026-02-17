@@ -1,3 +1,24 @@
+# HyCitizens (Patched Fork)
+
+This is a fork of [ElectroGamesDev/HyCitizens](https://github.com/ElectroGamesDev/HyCitizens) with fixes for the **February 2026 Hytale server update**.
+
+## What this fork fixes
+
+### 1. `InstantiationError: com.hypixel.hytale.protocol.ComponentUpdate`
+The Hytale update made `ComponentUpdate` an abstract class. The original plugin instantiated it directly (`new ComponentUpdate()`), causing a crash whenever an NPC tried to rotate toward a player. This fork uses the new `TransformUpdate` subclass instead.
+
+### 2. NPC skins being stripped on spawn
+Every NPC spawn was unconditionally rewriting the role JSON file to disk, even when nothing changed. Hytale's hot-reload detected the file modification and reloaded the NPC builder, which reset the entity's appearance and removed custom player skins. This fork now compares file content before writing and skips the write if unchanged.
+
+### Build note
+The `build.gradle.kts` has been updated to compile against a local `libs/HytaleServer.jar` instead of the Maven repository, to ensure compatibility with the latest server jar. Place your server jar in `libs/` before building.
+
+---
+
+*Original README follows below.*
+
+---
+
 # You can download the mod/plugin from [CurseForge](https://www.curseforge.com/hytale/mods/hycitizens)!
 Note: It's not recommended to build the plugin from source for production use. Changes between updates may not be completely tested or finished.
 
